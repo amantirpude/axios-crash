@@ -41,6 +41,7 @@ const editItem = (editBtn,user) =>{
       itemDate.value = user.date;
       let itemTime = document.getElementById("time");
       itemTime.value = user.time;
+      deleteDataFromCrudCrud(user._id);
   }
 }
 
@@ -88,29 +89,37 @@ function onsignup(event){
   }
 
   const postDataToCrudCrud = (myObj) => {
-    axios.post('https://crudcrud.com/api/415d78d4d19d4835be848cd04116adc0/appointmentData', myObj)
+    axios.post('https://crudcrud.com/api/02421ce2aeb240069646059303b337c6/appointmentData', myObj)
       .then((res) => {
         createElement(res.data);
       })
       .catch((err) => console.log(err));
   }
 
+  // const updateDataToCrudCrud = (id) => {
+  //   axios.put(`https://crudcrud.com/api/02421ce2aeb240069646059303b337c6/appointmentData/${id}`)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => console.log(err))
+  // }
+
+  const deleteDataFromCrudCrud = (id) => {
+    axios.delete(`https://crudcrud.com/api/02421ce2aeb240069646059303b337c6/appointmentData/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch ((err) => console.log(err))
+  }
+
   const printAllDataFromCrudCrud = () => {
-    axios.get('https://crudcrud.com/api/415d78d4d19d4835be848cd04116adc0/appointmentData')
+    axios.get('https://crudcrud.com/api/02421ce2aeb240069646059303b337c6/appointmentData')
         .then((res) => {
             res.data.forEach(element => {
                 createElement(element);
             });
-            console.log(typeof res);
         })
         .catch((err) => console.log(err))
   }
 
   printAllDataFromCrudCrud();
-
-  const deleteDataFromCrudCrud = (id) => {
-    axios.delete(`https://crudcrud.com/api/415d78d4d19d4835be848cd04116adc0/appointmentData/${id}`).then((res) => {
-      console.log(res);
-    })
-    .catch ((err) => console.log(err))
-  }
